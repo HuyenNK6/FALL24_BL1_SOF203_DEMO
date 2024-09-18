@@ -18,7 +18,7 @@
              -   GET: Tạo chuỗi truy vấn và đính kèm URL của @action
              -   POST: Mở kênh truyền thông ngầm gửi dữ liệu lên server
     --%>
-    <form action="/ket-qua" method="post">
+    <form action="/login" method="post">
         <div class="container">
             <label><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="usn"required>
@@ -26,11 +26,12 @@
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="pw" required>
             <br/>
-            <input type="checkbox" id="cboxid" name="cb" value="true" required>
+            <input type="checkbox" id="cboxid" name="cb" >
             <label for="cboxid"><b>Remember me?</b></label>
             <br/>
             <button type="submit">Login</button>
         </div>
     </form>
+    <h4>${messageResult}</h4>
 </body>
 </html>

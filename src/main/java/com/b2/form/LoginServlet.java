@@ -22,7 +22,7 @@ import java.io.IOException;
 
 //value = {"/home/login", "/ket-qua"}: Đây là một mảng các URL patterns mà servlet này sẽ xử lý.
 // Khi người dùng truy cập vào một trong các URL này, servlet loginServlet sẽ được gọi để xử lý yêu cầu.
-@WebServlet (name = "loginServlet", value = {"/home/login", "/ket-qua"})
+@WebServlet (name = "loginServlet", value = {"/login", "/ket-qua"})
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,9 +31,9 @@ public class LoginServlet extends HttpServlet {
         req.setAttribute("message",message);
         //Chuyển trang
         //cách 1:
-        req.getRequestDispatcher("/b2/form.jsp").forward(req,resp);
+        req.getRequestDispatcher("/b2/login.jsp").forward(req,resp);
         //cách 2:
-        //resp.sendRedirect("/b2/form.jsp");
+        //resp.sendRedirect("/b2/login.jsp");
     }
 
     @Override
@@ -43,10 +43,19 @@ public class LoginServlet extends HttpServlet {
         String username= req.getParameter("usn");
         String password= req.getParameter("pw");
 
-        //Bước 2: truyền dữ liệu từ servlet => jsp
-        req.setAttribute("username",username);
-        req.setAttribute("password",password);
-        req.getRequestDispatcher("/b2/ket-qua.jsp").forward(req,resp);
+        if ("huyennk6".equals(username) && "123".equals(password)){
+            //Bước 2: truyền dữ liệu từ servlet => jsp
+            req.setAttribute("username",username);
+            req.setAttribute("password",password);
+            req.setAttribute("messageResult","Đăng nhập thành công!");
+            //req.getRequestDispatcher("/b2/ket-qua.jsp").forward(req,resp);
+            resp.sendRedirect("/home/index");
+        }else{
+            req.setAttribute("messageResult","Đăng nhập không thành công!");
+            req.getRequestDispatcher("/b2/login.jsp").forward(req,resp);
+        }
+
+
     }
 //Cách hoạt động:
 //Khi người dùng truy cập vào .../home/login,

@@ -9,13 +9,13 @@ public class SinhVienService {
     private List<SinhVien> listSinhVien = new ArrayList<>();
 
     public SinhVienService() {
-        listSinhVien.add(new SinhVien("123", "Hang", 17, false, "HN"));
+        listSinhVien.add(new SinhVien("1230", "Hang", 17, false, "HN"));
         listSinhVien.add(new SinhVien("1234", "Ngan", 17, false, "HN"));
-        listSinhVien.add(new SinhVien("1235", "Phong", 17, true, "HN"));
-        listSinhVien.add(new SinhVien("1236", "Nguyen", 137, true, "HN"));
-        listSinhVien.add(new SinhVien("1237", "Tien", 173, true, "HN"));
-        listSinhVien.add(new SinhVien("1238", "Dung", 137, true, "HN"));
-        listSinhVien.add(new SinhVien("1239", "Khanh", 127, true, "HN"));
+        listSinhVien.add(new SinhVien("1235", "Phong", 18, true, "HN"));
+        listSinhVien.add(new SinhVien("1236", "Nguyen", 19, true, "HN"));
+        listSinhVien.add(new SinhVien("1237", "Tien", 20, true, "HN"));
+        listSinhVien.add(new SinhVien("1238", "Dung", 21, true, "HN"));
+        listSinhVien.add(new SinhVien("1239", "Khanh", 22, true, "HN"));
     }
 
     public List<SinhVien> getAllListSinhVien() {

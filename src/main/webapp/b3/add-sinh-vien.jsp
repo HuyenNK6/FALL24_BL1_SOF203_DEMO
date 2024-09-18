@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add Sinh Viên</title>
+    <title>Add New Student</title>
 </head>
 <body>
 <button><a href="/sinh-vien/get-all">Home</a></button>

@@ -17,7 +17,7 @@
         <label> Tên SV: </label> <input name="ten" placeholder="Nhập tên cần tìm">
         <button type="submit"> Search</button>
     </form>
-    <button><a href="/sinh-vien/view-add">Thêm SV Mới</a></button>
+    <button><a href="/sinh-vien/view-add">Add New Student</a></button>
     <table style="border: 1px solid;">
         <tr>
             <th>STT</th>
