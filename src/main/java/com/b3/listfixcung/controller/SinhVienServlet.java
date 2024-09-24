@@ -76,31 +76,33 @@ public class SinhVienServlet extends HttpServlet {
     }
     @SneakyThrows
     private void add (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        //B1: lấy dữ liệu từ view => servlet
-//        String mssv= req.getParameter("mssv");
-//        String ten= req.getParameter("ten");
-//        String tuoi= req.getParameter("tuoi");
-//        String diaChi= req.getParameter("diaChi");
-//        String gioiTinh= req.getParameter("gioiTinh");
-//
-//        //B2: Khởi tạo đối tượng
-//        SinhVien sv= new SinhVien(mssv,ten,
-//                Integer.valueOf(tuoi),
-//                Boolean.valueOf(gioiTinh), diaChi);
-//        //B3: Gọi service
+        //B1: lấy dữ liệu từ view => servlet
+        String mssv= req.getParameter("mssv");
+        String ten= req.getParameter("ten");
+        String tuoi= req.getParameter("tuoi");
+        String diaChi= req.getParameter("diaChi");
+        String gioiTinh= req.getParameter("gioiTinh");
+
+        //B2: Khởi tạo đối tượng
+        SinhVien sv= new SinhVien(mssv,ten,
+                Integer.valueOf(tuoi),
+                Boolean.valueOf(gioiTinh), diaChi);
+        //B3: Gọi service
+        service.addSinhVien(sv);
+        //B4: Quay lại trang chủ
+        //get lại list
+        listSV= service.getAllListSinhVien();
+        req.setAttribute("listSV", listSV);
+        req.getRequestDispatcher("/b3/sinh-vien.jsp").forward(req,resp);
+        /////////////////////////////////////////
+//        //Cách 2: BeanUtils
+//        SinhVien sv= new SinhVien();
+//        //add anotation @SneakyThrows
+//        BeanUtils.populate(sv, req.getParameterMap());
 //        service.addSinhVien(sv);
-//        //B4: Quay lại trang chủ
-//        //get lại list
 //        listSV= service.getAllListSinhVien();
 //        req.setAttribute("listSV", listSV);
-//        req.getRequestDispatcher("/b3/sinh-vien.jsp").forward(req,resp);
-        /////////////////////////////////////////
-        //Cách 2: BeanUtils
-        SinhVien sv= new SinhVien();
-        //add anotation @SneakyThrows
-        BeanUtils.populate(sv, req.getParameterMap());
-        service.addSinhVien(sv);
-        resp.sendRedirect("/b3/sinh-vien.jsp");
+//        resp.sendRedirect("/b3/sinh-vien.jsp");
 
     }
     private void viewUpdate (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -113,14 +115,21 @@ public class SinhVienServlet extends HttpServlet {
         //B1: lấy dữ liệu từ view => servlet
         String mssv= req.getParameter("mssv");
         String ten= req.getParameter("ten");
-        String tuoi= req.getParameter("tuoi");
+        int tuoi= Integer.parseInt(req.getParameter("tuoi"));
         String diaChi= req.getParameter("diaChi");
-        String gioiTinh= req.getParameter("gioiTinh");
+        Boolean gioiTinh= Boolean.parseBoolean(req.getParameter("gioiTinh"));
 
         //B2: Khởi tạo đối tượng
-        SinhVien sv= new SinhVien(mssv,ten,
-                Integer.valueOf(tuoi),
-                Boolean.valueOf(gioiTinh), diaChi);
+//        SinhVien sv= new SinhVien(mssv,ten,
+//                Integer.valueOf(tuoi),
+//                Boolean.valueOf(gioiTinh), diaChi);
+        SinhVien sv= SinhVien.builder()
+                .mssv(mssv)
+                .ten(ten)
+                .tuoi(tuoi)
+                .gioiTinh(gioiTinh)
+                .diaChi(diaChi)
+                .build();
         //B3: Gọi service
         service.updateSinhVien(sv);
         //B4: Quay lại trang chủ
