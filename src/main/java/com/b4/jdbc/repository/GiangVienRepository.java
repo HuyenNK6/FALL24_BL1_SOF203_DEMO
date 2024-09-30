@@ -23,7 +23,9 @@ public class GiangVienRepository {
     // GET ALL => Hiển thị tất cả
     public ArrayList<GiangVien> getAll() {
         //B1: Viết câu SQL
-        String sql = " SELECT ma, ten, loai, tuoi, bac, gioi_tinh  FROM QLGV.dbo.giang_vien;";
+        String sql = """
+                SELECT ma, ten, loai, tuoi, bac, gioi_tinh  FROM QLGV.dbo.giang_vien;
+                """;
 
         //B2: Mở cổng kết nối => xảy ra ngoại lệ => ném vào try-catch
             /*
@@ -91,11 +93,12 @@ public class GiangVienRepository {
         }
         return null;
     }
-/*
-- Select => trả về 1 bảng, có thể có 1 hoặc nhiều dòng
-=> lấy dc 1 list hoặc 1 đối tượng
-- Insert/update/delete => trả về 1 dòng thông báo (1 row thành công hoặc 0 row)
- */
+
+    /*
+    - Select => trả về 1 bảng, có thể có 1 hoặc nhiều dòng
+    => lấy dc 1 list hoặc 1 đối tượng
+    - Insert/update/delete => trả về 1 dòng thông báo (1 row thành công hoặc 0 row)
+     */
     public Boolean add(GiangVien gv) {
         int check = 0;
         String sql = "INSERT INTO [dbo].[giang_vien]\n" +
@@ -117,15 +120,19 @@ public class GiangVienRepository {
             ps.setObject(5, gv.getBac());
             ps.setObject(6, gv.isGioiTinh());
 
-            check =ps.executeUpdate();// thực hiện truy vấn
+            check = ps.executeUpdate();// thực hiện truy vấn
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return check > 0;
     }
+
     public Boolean update(GiangVien gv, String maUpdate) {
         int check = 0;
+        String a = """
+                        
+                """;
         String sql = "UPDATE [dbo].[giang_vien]\n" +
                 "   SET [ten] = ?\n" +
                 "      ,[loai] = ?\n" +
@@ -144,16 +151,17 @@ public class GiangVienRepository {
             ps.setObject(5, gv.isGioiTinh());
             ps.setObject(6, maUpdate);
 
-            check =ps.executeUpdate();// thực hiện truy vấn
+            check = ps.executeUpdate();// thực hiện truy vấn
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return check > 0;
     }
-    public Boolean delete( String maGV) {
+
+    public Boolean delete(String maGV) {
         int check = 0;
-        String sql = "DELETE FROM [dbo].[giang_vien]"+
+        String sql = "DELETE FROM [dbo].[giang_vien]" +
                 " WHERE [ma] = ?";
         try (Connection con = DBConnect.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)
@@ -161,7 +169,7 @@ public class GiangVienRepository {
 
             ps.setObject(1, maGV);
 
-            check =ps.executeUpdate();// thực hiện truy vấn
+            check = ps.executeUpdate();// thực hiện truy vấn
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,24 +178,24 @@ public class GiangVienRepository {
     }
 
     public static void main(String[] args) {
-        GiangVienRepository rep= new GiangVienRepository();
+        GiangVienRepository rep = new GiangVienRepository();
         GiangVien gv = rep.getOne("HangNT169");
         System.out.println(gv.toString());
-        Boolean checkAdd= rep.add(new GiangVien("HuyenNK6","Khanh Huyen","Loai 2",18,1,false));
+        Boolean checkAdd = rep.add(new GiangVien("HuyenNK6", "Khanh Huyen", "Loai 2", 18, 1, false));
         System.out.println(checkAdd);
-        List<GiangVien> list= rep.getAll();
+        List<GiangVien> list = rep.getAll();
         for (GiangVien giangVien : list) {
             System.out.println(giangVien.toString());
         }
-        Boolean checkUp= rep.update(new GiangVien("HuyenNK6","Khanh Huyen","Loai 2",18,2,false),"HuyenNK6");
+        Boolean checkUp = rep.update(new GiangVien("HuyenNK6", "Khanh Huyen", "Loai 2", 18, 2, false), "HuyenNK6");
         System.out.println(checkUp);
-        List<GiangVien> list2= rep.getAll();
+        List<GiangVien> list2 = rep.getAll();
         for (GiangVien giangVien : list2) {
             System.out.println(giangVien.toString());
         }
-        Boolean checkDel= rep.delete("HuyenNK6");
+        Boolean checkDel = rep.delete("HuyenNK6");
         System.out.println(checkDel);
-        List<GiangVien> list3= rep.getAll();
+        List<GiangVien> list3 = rep.getAll();
         for (GiangVien giangVien : list3) {
             System.out.println(giangVien.toString());
         }
