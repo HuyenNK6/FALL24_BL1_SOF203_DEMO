@@ -20,6 +20,8 @@
     <!-- Định dạng tiền tệ -->
     <p>Số tiền ban đầu: ${currency}</p>
     <p>Số tiền đã định dạng: <fmt:formatNumber value="${currency}" type="currency" currencySymbol="VND" /></p>
+<%--<jsp:useBean> là một thẻ trong JSP (JavaServer Pages) được sử dụng để khởi tạo và quản lý các JavaBean trong trang JSP.
+JavaBean là các đối tượng Java tuân theo một số quy tắc nhất định, giúp tái sử dụng mã và quản lý dữ liệu hiệu quả trong ứng dụng web.--%>
 
     <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
     <p>Ngày hiện tại:<fmt:formatDate value="${now}"></fmt:formatDate><br></p>
